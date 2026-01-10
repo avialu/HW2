@@ -1,91 +1,110 @@
-# HW2 – Android Game (Sensors & Buttons)
+# HW2 – Android Arcade Game (Buttons / Sensors) + High Scores & Map
 
-## 📱 תיאור כללי
+## Overview
 
-אפליקציית משחק לאנדרואיד, המהווה המשך לתרגיל הבית הראשון.
-במשחק השחקן שולט ברכב הנוסע בכביש בעל **5 נתיבים**, נמנע ממכשולים, אוסף מטבעות, וצובר ניקוד ומרחק.
+This project is the continuation of HW1.
+It is an Android arcade-style game where the player controls a car on a **5-lane road**, avoids obstacles, collects coins, and achieves the highest possible score.
 
-האפליקציה נבנתה באמצעות **Android Views (XML + Activities + Fragments)** ללא שימוש ב־Jetpack Compose.
-
----
-
-## 🎮 מצבי משחק
-
-### Buttons Mode
-
-שליטה באמצעות כפתורי שמאלה / ימינה על המסך.
-
-### Sensors Mode
-
-שליטה באמצעות **חיישן תאוצה (Accelerometer)** – הטיית המכשיר שמאלה או ימינה מזיזה את הרכב בין הנתיבים.
+The app is implemented using **Android Views (XML)** with **Activities** and **Fragments** (no Jetpack Compose).
 
 ---
 
-## 🧩 פיצ’רים עיקריים
+## Game Features
 
-* כביש בעל 5 נתיבים
-* מכשולים יורדים
-* מטבעות לאיסוף
-* ניקוד ומד מרחק (odometer)
-* שלושה חיים
-* סאונד שונה לאיסוף מטבע ולהתנגשות
-* רטט בהתנגשות (במכשיר פיזי)
-* תפריט ראשי לבחירת מצב משחק
-* טבלת שיאים (Top 10)
-* מפת מיקומים של השיאים (Google Maps)
-* לחיצה על שיא מעדכנת את מיקום המפה
+* **5-lane road**
+* **Buttons control mode** (Left/Right buttons)
+* **Sensors control mode** (Accelerometer tilt to move between lanes)
+* **Multiple obstacles** can appear simultaneously:
 
----
+  * Each spawn creates **1–3 obstacles**
+  * Obstacles can spawn every few ticks, so multiple rows may exist on screen at the same time
+* **Multiple coins** can appear simultaneously (more than one on screen at a time)
+* **Lives system** (3 lives)
+* **Score and distance counter**
+* **Sound feedback**
 
-## 🏆 מסך שיאים
+  * Different sound for **coin collection** and **crash**
+* **Vibration feedback**
 
-מסך השיאים ממומש באמצעות **שני Fragments**:
-
-* Fragment שמאלי: טבלת Top 10 (RecyclerView)
-* Fragment ימני: מפה המציגה מיקום לכל שיא
-
-המיקומים נשמרים עם ערכי Latitude / Longitude רנדומליים לצורך הדגמה.
+  * Vibration on crash (device dependent)
 
 ---
 
-## 🧠 ארכיטקטורה
+## Menu Screen
 
-* הפרדה בין לוגיקת משחק ל־UI
-* שימוש ב־Services חיצוניים:
+The menu allows:
 
-  * SoundService
-  * VibrationService
-* שימוש ב־ViewModel משותף למסך השיאים
-* שמירת נתונים מקומית (SharedPreferences)
+* Start game in **Buttons – Slow**
+* Start game in **Buttons – Fast**
+* Start game in **Sensors**
+* Open the **High Scores** screen
 
 ---
 
-## 🛠 טכנולוגיות
+## Speed Modes (Buttons)
+
+When playing with buttons, the user can choose between:
+
+* **Slow**
+* **Fast**
+
+Speed affects:
+
+* Game tick interval (movement speed)
+* Spawn frequency of obstacles/coins (difficulty)
+
+---
+
+## High Scores Screen (Two Fragments)
+
+The High Scores screen is implemented with **two separate fragments**:
+
+1. **TopScoresFragment** – displays a list of the **Top 10 scores** since installation
+2. **ScoresMapFragment** – displays a map with markers of the locations where those scores were achieved
+
+Behavior:
+
+* Selecting a score from the list updates the map camera and marker to the selected score location.
+
+---
+
+## Data Persistence
+
+* High scores are saved locally so they remain available between app launches.
+* Each saved record includes:
+
+  * Score
+  * Distance
+  * Timestamp
+  * Location (Latitude/Longitude)
+
+---
+
+## Technologies Used
 
 * Kotlin
 * Android SDK
-* XML Layouts
-* Fragments
+* XML Layouts (Views)
+* Activities & Fragments
 * RecyclerView
+* ViewModel / LiveData (shared between fragments)
 * Google Maps SDK
-* Sensors (Accelerometer)
 
 ---
 
-## ▶️ סרטון הדגמה
+## Demo Video
 
-מצורף סרטון המציג:
+A demo video is included in the submission, showing:
 
-* תפריט ראשי
-* משחק במצב כפתורים
-* משחק במצב סנסורים
-* איסוף מטבעות והתנגשויות
-* מעבר למסך השיאים
-* אינטראקציה עם המפה
+* Menu navigation
+* Buttons mode (Slow/Fast)
+* Sensors mode
+* Coin collection and obstacle collisions (sound feedback)
+* Transition to High Scores screen
+* Selecting a score and updating the map location
 
 ---
 
-## 👤 מחבר
-אביה לוריא
-קורס: פיתוח ממשקי משתמש
-שנה: 2026
+## Author
+
+Name: **AVIA LURIE**
